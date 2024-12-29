@@ -13,6 +13,9 @@
 
 ![UPDATED ER DIAGRAM](./Final.png)
 
+![UPDATED ER DIAGRAM](./Final2.png)
+
+
 Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department.
 
 
