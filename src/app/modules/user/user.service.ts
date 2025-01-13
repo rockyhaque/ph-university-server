@@ -50,7 +50,13 @@ const createStudentIntoDB = async (file: any, password: string, payload: TStuden
     // send img to Cloudinary
     const imageName = `${userData.id}${payload?.name?.firstName}`;
     const path = file?.path
-    sendImageToCloudinary(imageName, path);
+    const {secure_url} = await sendImageToCloudinary(imageName, path);
+    // const url = await sendImageToCloudinary(imageName, path);
+    // console.log("url", url)
+
+    // if (!secure_url) {
+    //   throw new AppError(httpStatus.BAD_REQUEST, 'Failed to upload image to Cloudinary');
+    // }
 
 
     // create a user(transaction - 1)
@@ -64,6 +70,9 @@ const createStudentIntoDB = async (file: any, password: string, payload: TStuden
     // set id , _id as user
     payload.id = newUser[0].id;
     payload.user = newUser[0]._id; //reference _id
+
+    payload.profileImg = secure_url
+
 
     // create a Student(transaction - 2)
     const newStudent = await Student.create([payload], { session });
